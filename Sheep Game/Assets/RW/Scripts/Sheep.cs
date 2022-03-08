@@ -9,9 +9,13 @@ public class Sheep : MonoBehaviour
     public float gotHayDestroyDelay;
     private bool hitByHay;
     private bool dropped;
+    public float dropDestroyDelay;
+    private Collider myCollider;
+    private Rigidbody myRigidbody;
     void Start()
     {
-
+        myCollider = GetComponent<Collider>();
+        myRigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -32,6 +36,17 @@ public class Sheep : MonoBehaviour
             Destroy(other.gameObject);
             HitByHay();
         }
+        else if (other.CompareTag("DropSheep") && !dropped)
+        {
+            Drop();
+        }
+    }
+    private void Drop()
+    {
+        dropped = true;
+        myRigidbody.isKinematic = false;
+        myCollider.isTrigger = false;
+        Destroy(gameObject, dropDestroyDelay);
     }
 
 }
