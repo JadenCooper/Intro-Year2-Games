@@ -9,9 +9,6 @@ public class Sheep : MonoBehaviour
     public float gotHayDestroyDelay;
     private bool hitByHay;
     private bool dropped;
-    public float dropDestroyDelay;
-    private Collider myCollider;
-    private Rigidbody myRigidbody;
     void Start()
     {
 
@@ -26,7 +23,6 @@ public class Sheep : MonoBehaviour
     {
         hitByHay = true;
         runSpeed = 0;
-
         Destroy(gameObject, gotHayDestroyDelay);
     }
     private void OnTriggerEnter(Collider other)
@@ -37,4 +33,5 @@ public class Sheep : MonoBehaviour
             HitByHay();
         }
     }
+
 }
