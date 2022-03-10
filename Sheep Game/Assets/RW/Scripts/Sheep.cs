@@ -30,6 +30,7 @@ public class Sheep : MonoBehaviour
     private void HitByHay()
     {
         Instantiate(heartPrefab, transform.position + new Vector3(0, heartOffset, 0), Quaternion.identity);
+        GameStateManager.Instance.SavedSheep();
         TweenScale tweenScale = gameObject.AddComponent<TweenScale>();
         tweenScale.targetScale = 0;
         tweenScale.timeToReachTarget = gotHayDestroyDelay;
@@ -53,6 +54,7 @@ public class Sheep : MonoBehaviour
     }
     private void Drop()
     {
+        GameStateManager.Instance.DroppedSheep();
         sheepSpawner.RemoveSheepFromList(gameObject);
         dropped = true;
         myRigidbody.isKinematic = false;
