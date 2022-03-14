@@ -839,6 +839,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfb520137f9748a4e97e591ae91a4e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &943860130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943860127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b062d5b417b686c41adbcb59387677aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 1858631407}
+  normalColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.39215687}
+  hoverColor: {r: 1, g: 1, b: 1, a: 0.39215687}
 --- !u!4 &1050572059 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1524613847715755804, guid: ff9c52423c3a7be49af987edf422bcff,
@@ -1389,6 +1404,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.5, y: 1, z: 0.4}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1616755917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616755914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b062d5b417b686c41adbcb59387677aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 2133186102}
+  normalColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.39215687}
+  hoverColor: {r: 1, g: 1, b: 1, a: 0.39215687}
 --- !u!1001 &1628133923
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1573,6 +1603,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af7e099ccf40c8046b7d720e9d8df558, type: 3}
+--- !u!23 &1858631407 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5665794796121731600, guid: ceb8b54db18a85342890b94e2a7c4c2a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5753924287342318882}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1948484056
 GameObject:
   m_ObjectHideFlags: 0
@@ -1720,6 +1756,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af7e099ccf40c8046b7d720e9d8df558, type: 3}
+--- !u!23 &2133186102 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5395833695422968519, guid: 8518085896b53be49b1eedb4c15d53c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 5395833696037591667}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1524613846732587527
 PrefabInstance:
   m_ObjectHideFlags: 0
