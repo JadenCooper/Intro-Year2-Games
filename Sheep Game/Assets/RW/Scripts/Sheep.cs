@@ -66,4 +66,8 @@ public class Sheep : MonoBehaviour
     {
         sheepSpawner = spawner;
     }
+    public void IncreaceSpeed(float additiveSpeed)
+    {
+        runSpeed += additiveSpeed;
+    }
 }
