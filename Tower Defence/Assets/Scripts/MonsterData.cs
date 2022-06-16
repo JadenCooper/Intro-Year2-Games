@@ -10,6 +10,7 @@ public class MonsterLevel
     public GameObject visualization;
     public GameObject bullet;
     public float fireRate;
+    public float fireradius;
 }
 public class MonsterData : MonoBehaviour
 {
@@ -61,6 +62,10 @@ public class MonsterData : MonoBehaviour
         if (currentLevelIndex < levels.Count - 1)
         {
             CurrentLevel = levels[currentLevelIndex + 1];
+
+            CircleCollider2D collider = this.transform.GetComponent<CircleCollider2D>();
+            collider.radius = levels[currentLevelIndex + 1].fireradius;
+            Debug.Log(levels[currentLevelIndex + 1].fireradius);
         }
     }
 
