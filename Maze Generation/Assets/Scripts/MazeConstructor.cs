@@ -1,23 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MazeConstructor : MonoBehaviour
 {
     public bool showDebug;
-    public float placementThreshold = 0.1f;   // chance of empty space
 
     private MazeMeshGenerator meshGenerator;
-
     [SerializeField] private Material mazeMat1;
     [SerializeField] private Material mazeMat2;
     [SerializeField] private Material startMat;
     [SerializeField] private Material treasureMat;
 
+    public Node[,] graph;
+
     public float hallWidth { get; private set; }
     public int goalRow { get; private set; }
     public int goalCol { get; private set; }
-    public Node[,] graph;
+
+    public float placementThreshold = 0.1f;   // chance of empty space
 
     public int[,] data
     {
@@ -27,6 +26,8 @@ public class MazeConstructor : MonoBehaviour
     void Awake()
     {
         meshGenerator = new MazeMeshGenerator();
+        hallWidth = meshGenerator.width;
+
         // default to walls surrounding a single empty cell
         data = new int[,]
         {
@@ -34,16 +35,17 @@ public class MazeConstructor : MonoBehaviour
             {1, 0, 1},
             {1, 1, 1}
         };
-        hallWidth = meshGenerator.width;
     }
 
     public void GenerateNewMaze(int sizeRows, int sizeCols)
     {
         DisposeOldMaze();
+
         if (sizeRows % 2 == 0 && sizeCols % 2 == 0)
             Debug.LogError("Odd numbers work better for dungeon size.");
 
         data = FromDimensions(sizeRows, sizeCols);
+
         goalRow = data.GetUpperBound(0) - 1;
         goalCol = data.GetUpperBound(1) - 1;
 
@@ -71,7 +73,6 @@ public class MazeConstructor : MonoBehaviour
                     maze[i, j] = 1;
 
                     int a = Random.value < .5 ? 0 : (Random.value < .5 ? -1 : 1);
-                    // ? equals If To The Left Of it is the contion the colon is the else. So if random value is less than .5, a = 0 else 
                     int b = a != 0 ? 0 : (Random.value < .5 ? -1 : 1);
                     maze[i + a, j + b] = 1;
                 }
@@ -95,6 +96,15 @@ public class MazeConstructor : MonoBehaviour
         mr.materials = new Material[2] { mazeMat1, mazeMat2 };
     }
 
+    public void DisposeOldMaze()
+    {
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("Generated");
+        foreach (GameObject go in objects)
+        {
+            Destroy(go);
+        }
+    }
+
     void OnGUI()
     {
         if (!showDebug)
@@ -115,13 +125,4 @@ public class MazeConstructor : MonoBehaviour
 
         GUI.Label(new Rect(20, 20, 500, 500), msg);
     }
-    public void DisposeOldMaze()
-    {
-        GameObject[] objects = GameObject.FindGameObjectsWithTag("Generated");
-        foreach (GameObject go in objects)
-        {
-            Destroy(go);
-        }
-    }
 }
-

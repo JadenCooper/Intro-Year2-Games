@@ -33,6 +33,7 @@ public class AIController : MonoBehaviour
         int remaining = xDistance - yDistance;
         return MOVE_DIAGONAL_COST * Mathf.Min(xDistance, yDistance) + MOVE_STRAIGHT_COST * remaining;
     }
+
     private Node GetLowestFCostNode(List<Node> pathNodeList)
     {
         Node lowestFCostNode = pathNodeList[0];
@@ -42,6 +43,7 @@ public class AIController : MonoBehaviour
 
         return lowestFCostNode;
     }
+
     private List<Node> GetNeighbourList(Node currentNode)
     {
         List<Node> neighbourList = new List<Node>();
@@ -73,6 +75,7 @@ public class AIController : MonoBehaviour
 
         return neighbourList;
     }
+
     private List<Node> CalculatePath(Node endNode)
     {
         List<Node> path = new List<Node>();
@@ -86,6 +89,7 @@ public class AIController : MonoBehaviour
         path.Reverse();
         return path;
     }
+
     public List<Node> FindPath(int startX, int startY, int endX, int endY)
     {
         Node startNode = graph[startX, startY];
