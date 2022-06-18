@@ -9,7 +9,8 @@ public class SheepSpawner : MonoBehaviour
     public List<Transform> sheepSpawnPositions = new List<Transform>();
     public float timeBetweenSpawns;
     private List<GameObject> sheepList = new List<GameObject>();
-    public float additiveSpeed = 0;
+
+    public float additiveSpeed = 0f;
     void Start()
     {
         StartCoroutine(SpawnRoutine());
@@ -22,12 +23,11 @@ public class SheepSpawner : MonoBehaviour
     }
     private void SpawnSheep()
     {
-        additiveSpeed += 0.02f;
         Vector3 randomPosition = sheepSpawnPositions[Random.Range(0, sheepSpawnPositions.Count)].position;
         GameObject sheep = Instantiate(sheepPrefab, randomPosition, sheepPrefab.transform.rotation);
+        sheep.GetComponent<Sheep>().runSpeed += additiveSpeed;
         sheepList.Add(sheep);
         sheep.GetComponent<Sheep>().SetSpawner(this);
-        Difficuilty();
     }
     private IEnumerator SpawnRoutine()
     {
@@ -49,17 +49,5 @@ public class SheepSpawner : MonoBehaviour
         }
 
         sheepList.Clear();
-    }
-    public void Difficuilty()
-    {
-        foreach (GameObject sheep in sheepList)
-        {
-            sheep.GetComponent<Sheep>().IncreaceSpeed(additiveSpeed);
-        }
-
-        if(timeBetweenSpawns > 1)
-        {
-            timeBetweenSpawns -= 0.005f;
-        }
     }
 }

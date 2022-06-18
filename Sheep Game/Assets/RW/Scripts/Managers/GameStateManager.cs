@@ -7,6 +7,8 @@ public class GameStateManager : MonoBehaviour
 {
     public static GameStateManager Instance;
 
+    public UIManager uimanager;
+
     [HideInInspector]
     public int sheepSaved;
 
@@ -15,6 +17,8 @@ public class GameStateManager : MonoBehaviour
 
     public int sheepDroppedBeforeGameOver;
     public SheepSpawner sheepSpawner;
+
+    private int sheepSavedCounter = 0;
     void Awake()
     {
         Instance = this;
@@ -31,12 +35,31 @@ public class GameStateManager : MonoBehaviour
     public void SavedSheep()
     {
         sheepSaved++;
+        sheepSavedCounter++;
+        if(sheepSavedCounter == 5 || sheepSavedCounter == 10)
+        {
+            sheepSpawner.GetComponent<SheepSpawner>().additiveSpeed += 0.5f;
+            if (sheepSavedCounter == 10)
+            {
+                sheepSavedCounter = 0;
+                if(sheepDropped != 0)
+                {
+                    sheepDropped--;
+                    UIManager.Instance.UpdateSheepDropped();
+                }
+                if(sheepSpawner.GetComponent<SheepSpawner>().timeBetweenSpawns != 1F)
+                {
+                    sheepSpawner.GetComponent<SheepSpawner>().timeBetweenSpawns -= 0.2F;
+                }
+            }
+        }
         UIManager.Instance.UpdateSheepSaved();
     }
     private void GameOver()
     {
         sheepSpawner.canSpawn = false;
         sheepSpawner.DestroyAllSheep();
+        uimanager.SetHighScore();
         UIManager.Instance.ShowGameOverWindow();
     }
     public void DroppedSheep()
