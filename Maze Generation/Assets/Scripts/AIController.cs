@@ -26,7 +26,7 @@ public class AIController : MonoBehaviour
         get { return player; }
         set { player = value; }
     }
-    private float hallWidth;
+    public float hallWidth;
     public float HallWidth
     {
         get { return hallWidth; }
@@ -58,6 +58,7 @@ public class AIController : MonoBehaviour
                 float nextX = nextNode.y * hallWidth;
                 float nextZ = nextNode.x * hallWidth;
                 Vector3 endPosition = new Vector3(nextX, 0f, nextZ);
+
                 float step = monsterSpeed * Time.deltaTime;
                 monster.transform.position = Vector3.MoveTowards(monster.transform.position, endPosition, step);
                 Vector3 targetDirection = endPosition - monster.transform.position;

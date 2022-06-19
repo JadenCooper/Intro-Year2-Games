@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MazeConstructor : MonoBehaviour
@@ -18,6 +19,7 @@ public class MazeConstructor : MonoBehaviour
 
     public float placementThreshold = 0.1f;   // chance of empty space
 
+    private List<GameObject> SphereList;
     public int[,] data
     {
         get; private set;
@@ -28,6 +30,7 @@ public class MazeConstructor : MonoBehaviour
         meshGenerator = new MazeMeshGenerator();
         hallWidth = meshGenerator.width;
 
+        SphereList = new List<GameObject>();
         // default to walls surrounding a single empty cell
         data = new int[,]
         {
@@ -85,12 +88,49 @@ public class MazeConstructor : MonoBehaviour
         treasure.transform.position = new Vector3(goalCol * hallWidth, .5f, goalRow * hallWidth);
         treasure.name = "Treasure";
         treasure.tag = "Generated";
-
         treasure.GetComponent<BoxCollider>().isTrigger = true;
         treasure.GetComponent<MeshRenderer>().sharedMaterial = treasureMat;
 
         TriggerEventRouter tc = treasure.AddComponent<TriggerEventRouter>();
         tc.callback = treasureCallback;
+    }
+
+    public void Pathway(List<Node> SpherePath)
+    {
+        //foreach (Node node in SpherePath)
+        //{
+        //    GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        //    sphere.transform.position = new Vector3(node.x * hallWidth, .5f, node.y * hallWidth);
+        //    sphere.name = "Sphere";
+        //    sphere.tag = "Generated";
+        //    sphere.GetComponent<SphereCollider>().isTrigger = true;
+        //    sphere.GetComponent<MeshRenderer>().sharedMaterial = treasureMat;
+        //}
+
+        if(SphereList != null)
+        {
+            foreach(GameObject sphere in SphereList)
+            {
+                Destroy(sphere);
+            }
+            SphereList = null;
+        }
+
+        SphereList = new List<GameObject>();
+
+        for (int i = 1; i <= (SpherePath.Count - 2); i++)
+        {
+            Node nextNode = SpherePath[i];
+            float nextX = nextNode.y * hallWidth;
+            float nextZ = nextNode.x * hallWidth;
+            Vector3 endPosition = new Vector3(nextX, .7f, nextZ);
+            SphereList.Add(GameObject.CreatePrimitive(PrimitiveType.Sphere));
+            SphereList[i - 1].transform.position = endPosition;
+            SphereList[i - 1].name = "Sphere";
+            SphereList[i - 1].tag = "Generated";
+            SphereList[i - 1].GetComponent<SphereCollider>().isTrigger = true;
+            SphereList[i - 1].GetComponent<MeshRenderer>().sharedMaterial = treasureMat;
+        }
     }
 
     private void DisplayMaze()

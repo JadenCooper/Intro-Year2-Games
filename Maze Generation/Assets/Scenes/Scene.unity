@@ -384,6 +384,7 @@ MonoBehaviour:
   monsterPrefab: {fileID: 895211356916686346, guid: fd2c1fc83ba3e0747900ca276373c04c, type: 3}
   rows: 11
   cols: 11
+  player: {fileID: 0}
 --- !u!114 &1658323702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,7 +397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fdb0fa833971744b9e3133ca626ab78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showDebug: 1
+  showDebug: 0
   mazeMat1: {fileID: 2100000, guid: ee1783965edfa174f8339d26768f43c2, type: 2}
   mazeMat2: {fileID: 2100000, guid: 545a9273b54400a4799bbd2fa83df569, type: 2}
   startMat: {fileID: 2100000, guid: d8719ff0a4b40af42a8410f5d047d6f3, type: 2}
@@ -428,4 +429,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d6201fbeada98e49acc8ecea0d10f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterSpeed: 3
+  hallWidth: 0
+  monsterSpeed: 6
