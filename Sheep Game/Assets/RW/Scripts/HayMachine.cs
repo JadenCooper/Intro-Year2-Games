@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class HayMachine : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // This Script Manage's Hay Machine
+
     public float movementSpeed;
+
+    // The HorizontalBoundary is the ends of the Hay Machine Track
     public float horizontalBoundary = 22;
     public GameObject hayBalePrefab;
     public Transform haySpawnpoint;
@@ -21,6 +24,8 @@ public class HayMachine : MonoBehaviour
     }
     private void LoadModel()
     {
+        // This method handle's the color of the Hay Machine
+
         Destroy(modelParent.GetChild(0).gameObject);
 
         switch (GameSettings.hayMachineColor)
@@ -46,6 +51,8 @@ public class HayMachine : MonoBehaviour
     }
     private void UpdateMovement()
     {
+        // This method controls the movement of the Haymachine 
+
         float horizontalInput = Input.GetAxisRaw("Horizontal");
 
         if (horizontalInput < 0 && transform.position.x > -horizontalBoundary)
@@ -59,6 +66,7 @@ public class HayMachine : MonoBehaviour
     }
     private void UpdateShooting()
     {
+        // This method handle's shooting intervals so the player cant constantly shoot
         shootTimer -= Time.deltaTime;
 
         if (shootTimer <= 0 && Input.GetKey(KeyCode.Space))
@@ -69,6 +77,7 @@ public class HayMachine : MonoBehaviour
     }
     private void ShootHay()
     {
+        // This method spawns the hay and plays the soundclip
         SoundManager.Instance.PlayShootClip();
         Instantiate(hayBalePrefab, haySpawnpoint.position, Quaternion.identity);
     }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TweenScale : MonoBehaviour
 {
+    // This script scales the sheep heart 
+
     public float targetScale;
     public float timeToReachTarget;
     private float startScale;

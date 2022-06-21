@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Sheep : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // This Script Handle's The Sheep
     public float runSpeed;
     public float gotHayDestroyDelay;
     private bool hitByHay;
@@ -29,9 +29,11 @@ public class Sheep : MonoBehaviour
     }
     private void HitByHay()
     {
+        // Spawn The Sheep Heart
         Instantiate(heartPrefab, transform.position + new Vector3(0, heartOffset, 0), Quaternion.identity);
         GameStateManager.Instance.SavedSheep();
         TweenScale tweenScale = gameObject.AddComponent<TweenScale>();
+        // Set TweenScale Settings
         tweenScale.targetScale = 0;
         tweenScale.timeToReachTarget = gotHayDestroyDelay;
         sheepSpawner.RemoveSheepFromList(gameObject);
@@ -42,13 +44,16 @@ public class Sheep : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        // This Method Activates Upon Hitting A Trigger
         if (other.CompareTag("Hay") && !hitByHay)
         {
+            // Hit By Hay So This Sheep Is Saved
             Destroy(other.gameObject);
             HitByHay();
         }
         else if (other.CompareTag("DropSheep") && !dropped)
         {
+            // Made It Past The HayMachine And Escaped So Lose Life
             Drop();
         }
     }

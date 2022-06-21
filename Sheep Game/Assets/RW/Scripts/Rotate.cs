@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class Rotate : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // This script just handles the rotation of the windmills and the Sheep Hearts
+
     public Vector3 rotationSpeed;
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()

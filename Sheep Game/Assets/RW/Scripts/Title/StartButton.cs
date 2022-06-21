@@ -8,6 +8,7 @@ public class StartButton : MonoBehaviour, IPointerClickHandler
 {
     public void OnPointerClick(PointerEventData eventData)
     {
+        // Starts The Game
         SceneManager.LoadScene("Game");
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using System;
 public class HayMachineSwitch : MonoBehaviour, IPointerClickHandler
 {
+    // This script handle's the abillty to change the color of the haymachine by pressing on it in the main menu
     public GameObject blueHayMachine;
     public GameObject yellowHayMachine;
     public GameObject redHayMachine;

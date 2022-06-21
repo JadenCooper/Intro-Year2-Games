@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    // This Script Manage's The Sound
+
     public static SoundManager Instance;
     public AudioClip shootClip;
     public AudioClip sheepHitClip;
@@ -13,12 +15,6 @@ public class SoundManager : MonoBehaviour
     {
         Instance = this;
         cameraPosition = Camera.main.transform.position;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
     private void PlaySound(AudioClip clip)
     {

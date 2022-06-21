@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SheepSpawner : MonoBehaviour
 {
+    // This script handle's spawning of the sheep
     public bool canSpawn = true;
     public GameObject sheepPrefab;
     public List<Transform> sheepSpawnPositions = new List<Transform>();
@@ -15,16 +16,11 @@ public class SheepSpawner : MonoBehaviour
     {
         StartCoroutine(SpawnRoutine());
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     private void SpawnSheep()
     {
         Vector3 randomPosition = sheepSpawnPositions[Random.Range(0, sheepSpawnPositions.Count)].position;
         GameObject sheep = Instantiate(sheepPrefab, randomPosition, sheepPrefab.transform.rotation);
+        //Increaces the spawned sheep's run speed by the current additive speed
         sheep.GetComponent<Sheep>().runSpeed += additiveSpeed;
         sheepList.Add(sheep);
         sheep.GetComponent<Sheep>().SetSpawner(this);
@@ -43,6 +39,7 @@ public class SheepSpawner : MonoBehaviour
     }
     public void DestroyAllSheep()
     {
+        // This method destroys all sheep at the end of the game
         foreach (GameObject sheep in sheepList)
         {
             Destroy(sheep);

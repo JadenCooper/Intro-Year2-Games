@@ -7,6 +7,8 @@ using System.Linq;
 
 public class UIManager : MonoBehaviour
 {
+    // This Script Manage's The UI
+
     public static UIManager Instance;
     public Text sheepSavedText;
     public Text sheepDroppedText;
@@ -29,11 +31,13 @@ public class UIManager : MonoBehaviour
 
     public void UpdateSheepSaved()
     {
+        // Sets the current score
         sheepSavedText.text = GameStateManager.Instance.sheepSaved.ToString();
     }
 
     public void UpdateSheepDropped()
     {
+        // Sets the lives
         sheepDroppedText.text = GameStateManager.Instance.sheepDropped.ToString();
     }
     public void ShowGameOverWindow()
@@ -43,6 +47,7 @@ public class UIManager : MonoBehaviour
 
     public void AssignHighScore()
     {
+        // This method pulls in the previous highscore from the highscore text file then assigns it
         List<string> temp = File.ReadAllLines(path).ToList();
         foreach (string line in temp)
         {
@@ -52,6 +57,7 @@ public class UIManager : MonoBehaviour
     }
     public void SetHighScore()
     {
+        // This method checks if the current game's new highscore is bigger than the previous, if so rewrites the text file with it
         if ( int.Parse(sheepSavedText.text)  > int.Parse(PreviousHighScore))
         {
             File.WriteAllText(path, sheepSavedText.text);
