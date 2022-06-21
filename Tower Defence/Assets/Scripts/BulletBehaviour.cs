@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BulletBehaviour : MonoBehaviour
 {
+    // This script handle's the bullets
+
     public float speed = 10;
     public int damage;
     public GameObject target;
@@ -36,7 +38,9 @@ public class BulletBehaviour : MonoBehaviour
 
             if (healthBar.currentHealth <= 0)
             {
+                // Killed Target
                 Destroy(target);
+                // Play sound
                 AudioSource audioSource = target.GetComponent<AudioSource>();
                 AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
                 gameManager.Gold += 50;

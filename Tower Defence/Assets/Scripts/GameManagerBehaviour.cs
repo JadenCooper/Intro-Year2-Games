@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class GameManagerBehaviour : MonoBehaviour
 {
+    // This Script Handle's The General Gameplay
+
     public Text goldLabel;
     private int gold;
     public Text waveLabel;
@@ -20,12 +22,6 @@ public class GameManagerBehaviour : MonoBehaviour
         Wave = 0;
         Health = 5;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public int Health
     {
         get { return health; }
@@ -39,6 +35,7 @@ public class GameManagerBehaviour : MonoBehaviour
 
             if (health <= 0 && !gameOver)
             {
+                // Run Out Of Lives Game Over
                 gameOver = true;
                 GameObject gameOverText = GameObject.FindGameObjectWithTag("GameOver");
                 gameOverText.GetComponent<Animator>().SetBool("gameOver", true);

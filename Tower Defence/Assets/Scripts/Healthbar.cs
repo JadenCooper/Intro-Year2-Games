@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Healthbar : MonoBehaviour
 {
+    // This script handle's the health bar of the enemies
     public float maxHealth = 100;
     public float currentHealth = 100;
     private float originalScale;

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ShootEni : MonoBehaviour
 {
+    // This Script Handle's The Tower's Targeting
+
     public List<GameObject> enemiesInRange;
     private float lastShotTime;
     private MonsterData monsterData;
@@ -21,6 +23,7 @@ public class ShootEni : MonoBehaviour
         float minimalEnemyDistance = float.MaxValue;
         foreach (GameObject enemy in enemiesInRange)
         {
+            // This Foreach Goes Through All Targets In Range Then Sets Target To The Closest One To The End
             float distanceToGoal = enemy.GetComponent<MoveEnemy>().DistanceToGoal();
             if (distanceToGoal < minimalEnemyDistance)
             {
@@ -31,6 +34,7 @@ public class ShootEni : MonoBehaviour
 
         if (target != null)
         {
+            // Found Target So Fire
             if (Time.time - lastShotTime > monsterData.CurrentLevel.fireRate)
             {
                 Shoot(target.GetComponent<Collider2D>());
@@ -42,16 +46,19 @@ public class ShootEni : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
+        // Target In Range
         if (other.gameObject.tag.Equals("Enemy"))
             enemiesInRange.Add(other.gameObject);
     }
     void OnTriggerExit2D(Collider2D other)
     {
+        // Target Left Range
         if (other.gameObject.tag.Equals("Enemy"))
             enemiesInRange.Remove(other.gameObject);
     }
     void Shoot(Collider2D target)
     {
+        // Assign Bullet Type Based On Tower's Level
         GameObject bulletPrefab = monsterData.CurrentLevel.bullet;
         Vector3 startPosition = gameObject.transform.position;
         Vector3 targetPosition = target.transform.position;

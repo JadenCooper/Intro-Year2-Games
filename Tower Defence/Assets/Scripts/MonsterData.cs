@@ -4,12 +4,17 @@ using UnityEngine;
 
 
 [System.Serializable]
+// This Script Handle's The Tower Levels
 public class MonsterLevel
 {
+    // Monster Level Stats
     public int cost;
+    // Character Sprite
     public GameObject visualization;
+    // Bullet
     public GameObject bullet;
     public float fireRate;
+    // Fire Area
     public float fireradius;
 }
 public class MonsterData : MonoBehaviour
@@ -53,6 +58,7 @@ public class MonsterData : MonoBehaviour
         }
         else
         {
+            // Max Level
             return null;
         }
     }
@@ -63,6 +69,7 @@ public class MonsterData : MonoBehaviour
         {
             CurrentLevel = levels[currentLevelIndex + 1];
 
+            // This Changes The Circle Collider For The Fire Radius By Level
             CircleCollider2D collider = this.transform.GetComponent<CircleCollider2D>();
             collider.radius = levels[currentLevelIndex + 1].fireradius;
             Debug.Log(levels[currentLevelIndex + 1].fireradius);

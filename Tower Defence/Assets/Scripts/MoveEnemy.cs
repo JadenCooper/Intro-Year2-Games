@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MoveEnemy : MonoBehaviour
 {
+    // This Script Handle's The Movement Of The Enemies
+
     [HideInInspector]
     public GameObject[] waypoints;
     private int currentWaypoint = 0;
@@ -46,6 +48,7 @@ public class MoveEnemy : MonoBehaviour
     }
     private void RotateIntoMoveDirection()
     {
+        // This Method Rotates The Enemy Once They Get To The End Of The Lane
         Vector3 newStartPosition = waypoints[currentWaypoint].transform.position;
         Vector3 newEndPosition = waypoints[currentWaypoint + 1].transform.position;
         Vector3 newDirection = (newEndPosition - newStartPosition);
@@ -59,6 +62,7 @@ public class MoveEnemy : MonoBehaviour
     }
     public float DistanceToGoal()
     {
+        // This Method Is Used By The Towers To Determine Which Enemy To Fire At
         float distance = Vector2.Distance(gameObject.transform.position, waypoints[currentWaypoint + 1].transform.position);
         for (int i = currentWaypoint + 1; i < waypoints.Length - 1; i++)
         {

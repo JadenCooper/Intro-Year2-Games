@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// This Script Handle's The Spawning Of The Enemies And Waves
 [System.Serializable]
 public class Wave
 {
@@ -50,6 +51,7 @@ public class SpawnEnemy : MonoBehaviour
 
             if (enemiesSpawned == waves[currentWave].maxEnemies && GameObject.FindGameObjectWithTag("Enemy") == null)
             {
+                // Wave/Round Over
                 gameManager.Wave++;
                 gameManager.Gold = Mathf.RoundToInt(gameManager.Gold * 1.1f);
                 enemiesSpawned = 0;
@@ -58,6 +60,7 @@ public class SpawnEnemy : MonoBehaviour
         }
         else
         {
+            // Won Game
             gameManager.gameOver = true;
             GameObject gameOverText = GameObject.FindGameObjectWithTag("GameWon");
             gameOverText.GetComponent<Animator>().SetBool("gameOver", true);
@@ -66,7 +69,13 @@ public class SpawnEnemy : MonoBehaviour
     
     public void SpawnEnemies(int currentWave)
     {
+        // Two Enemy Types 
+        // Quick Which Are Fast And Have Low Health
+        // Strong Which Are Slow And Have High Health
+
+        // Random Roll For Either Quick Or Strong
         int EnemyTypeSeed = Random.Range(0, 10);
+        // Random Roll For Either Advanced Or Basic
         int EnemyQuailtySeed = Random.Range(0, 10);
         bool Advanced = false;
         bool Strong = false;
@@ -89,11 +98,13 @@ public class SpawnEnemy : MonoBehaviour
         {
             if(Advanced == true)
             {
+                // Strong Advanced
                 newEnemy = (GameObject)Instantiate(waves[currentWave].strongAdvancedPrefab);
             }
 
             else
             {
+                // Strong Basic
                 newEnemy = (GameObject)Instantiate(waves[currentWave].strongBasicPrefab);
             }
         }
@@ -102,11 +113,13 @@ public class SpawnEnemy : MonoBehaviour
         {
             if(Advanced == true)
             {
+                // Quick Advanced
                 newEnemy = (GameObject)Instantiate(waves[currentWave].quickAdvancedPrefab);
             }
 
             else
             {
+                // Quick Basic
                 newEnemy = (GameObject)Instantiate(waves[currentWave].quickBasicPrefab);
             }
         }
