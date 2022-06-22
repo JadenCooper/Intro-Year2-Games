@@ -20,3 +20,6 @@ Maze Generation
 Chess
 - Lecture Tasks: Completed
 - Assement Tasks: Completed
+
+Notes
+- No Addtional Resources Were Used Besides The PolyGameDev Game Fox Den Hotel https://github.com/BIT-Studio-3/path-of-study-helper-polygamedev Which Was Used As Inspiration
