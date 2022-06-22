@@ -12,8 +12,12 @@ public class GameController : MonoBehaviour
     public GameObject monsterPrefab;
     private AIController aIController;
 
-    [SerializeField] private int rows;
-    [SerializeField] private int cols;
+    [SerializeField] private int maxRows;
+    [SerializeField] private int maxCols;
+    [SerializeField] private int minRows;
+    [SerializeField] private int minCols;
+    private int rows;
+    private int cols;
 
     List<Node> SpherePath;
 
@@ -101,6 +105,18 @@ public class GameController : MonoBehaviour
     private void SetUpMaze()
     {
         // Resets The Game
+
+        // These Next While Loops Randomize The Maze Row And Cols
+        do
+        {
+            rows = UnityEngine.Random.Range(1, maxRows);
+        } while ((rows % 2 == 0) || rows < minRows);
+        // They Have To Be Lower Than The Max, High Than The Min And Odd
+        do
+        {
+            cols = UnityEngine.Random.Range(1, maxCols);
+        } while ((cols % 2 == 0) || cols < minCols);
+
         constructor.GenerateNewMaze(rows, cols, OnTreasureTrigger);
         aIController.Graph = constructor.graph;
         aIController.Player = CreatePlayer();
