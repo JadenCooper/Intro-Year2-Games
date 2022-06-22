@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AIController : MonoBehaviour
 {
+    // This Script Controls The AI
     private const int MOVE_STRAIGHT_COST = 10;
     private const int MOVE_DIAGONAL_COST = 140;
 

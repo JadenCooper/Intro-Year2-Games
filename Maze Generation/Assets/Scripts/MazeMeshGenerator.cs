@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class MazeMeshGenerator
 {
+    // This Script Handle's The Creation Of Visual Maze
+
     // generator params
     public float width;     // how wide are hallways
     public float height;    // how tall are hallways

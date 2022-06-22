@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class MazeConstructor : MonoBehaviour
 {
+    // This Script Handle's The Creation Of The Maze
+
     public bool showDebug;
 
     private MazeMeshGenerator meshGenerator;
@@ -42,6 +44,7 @@ public class MazeConstructor : MonoBehaviour
 
     public void GenerateNewMaze(int sizeRows, int sizeCols, TriggerEventHandler treasureCallback)
     {
+        // This Method Generates The Maze
         DisposeOldMaze();
 
         if (sizeRows % 2 == 0 && sizeCols % 2 == 0)
@@ -84,6 +87,7 @@ public class MazeConstructor : MonoBehaviour
 
     private void PlaceGoal(TriggerEventHandler treasureCallback)
     {
+        // This Method Creates The End Treasure
         GameObject treasure = GameObject.CreatePrimitive(PrimitiveType.Cube);
         treasure.transform.position = new Vector3(goalCol * hallWidth, .5f, goalRow * hallWidth);
         treasure.name = "Treasure";
@@ -97,18 +101,10 @@ public class MazeConstructor : MonoBehaviour
 
     public void Pathway(List<Node> SpherePath)
     {
-        //foreach (Node node in SpherePath)
-        //{
-        //    GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        //    sphere.transform.position = new Vector3(node.x * hallWidth, .5f, node.y * hallWidth);
-        //    sphere.name = "Sphere";
-        //    sphere.tag = "Generated";
-        //    sphere.GetComponent<SphereCollider>().isTrigger = true;
-        //    sphere.GetComponent<MeshRenderer>().sharedMaterial = treasureMat;
-        //}
-
+        // This Method Creates The SpherePath From The Player To The Treasure
         if(SphereList != null)
         {
+            // This Checks To Make Sure No Path Has Been Created, If It Has Destroy The Previous Path
             foreach(GameObject sphere in SphereList)
             {
                 Destroy(sphere);
@@ -120,6 +116,7 @@ public class MazeConstructor : MonoBehaviour
 
         for (int i = 1; i <= (SpherePath.Count - 2); i++)
         {
+            // This For Loops Goes Through Each Node Of The Path Creating The Sphere And Adding It To A List
             Node nextNode = SpherePath[i];
             float nextX = nextNode.y * hallWidth;
             float nextZ = nextNode.x * hallWidth;
@@ -135,6 +132,7 @@ public class MazeConstructor : MonoBehaviour
 
     private void DisplayMaze()
     {
+        // This Shows The Maze
         GameObject go = new GameObject();
         go.transform.position = Vector3.zero;
         go.name = "Procedural Maze";
@@ -152,6 +150,7 @@ public class MazeConstructor : MonoBehaviour
 
     public void DisposeOldMaze()
     {
+        // Destroys The Maze
         GameObject[] objects = GameObject.FindGameObjectsWithTag("Generated");
         foreach (GameObject go in objects)
         {
@@ -161,13 +160,13 @@ public class MazeConstructor : MonoBehaviour
 
     void OnGUI()
     {
+        // This Method Shows The Debug Maze Map
+
         if (!showDebug)
             return;
-
         int[,] maze = data;
         int rMax = maze.GetUpperBound(0);
         int cMax = maze.GetUpperBound(1);
-
         string msg = "";
 
         for (int i = rMax; i >= 0; i--)

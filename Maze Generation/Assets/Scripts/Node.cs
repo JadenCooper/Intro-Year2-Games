@@ -1,5 +1,6 @@
 public class Node
 {
+    // This Script Holds The Details For A Node
     public int x;
     public int y;
 

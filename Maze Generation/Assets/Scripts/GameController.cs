@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    // This Script Controls The General Gameplay
     private MazeConstructor constructor;
     public GameObject playerPrefab;
     public GameObject monsterPrefab;
@@ -32,10 +33,12 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyDown("r"))
         {
+            // Restarts The Maze
             SetUpMaze();
         }
         if (Input.GetKeyDown("f"))
         {
+            // This Generates The Sphere Path To The Treasure
             int playerCol = (int)Mathf.Round(player.transform.position.x / aIController.HallWidth);
             int playerRow = (int)Mathf.Round(player.transform.position.z / aIController.HallWidth);
 
@@ -43,19 +46,24 @@ public class GameController : MonoBehaviour
             int GoalCol = aIController.Graph.GetUpperBound(1) - 1;
             if(SpherePath != null)
             {
+                // Makes Sure The Path Is Clear If Not Clear It
                 SpherePath = null;
             }
+            // Find Path From Player To The Treasure
             SpherePath = aIController.FindPath(playerRow, playerCol, GoalRow, GoalCol);
+            // Generate The Spheres
             constructor.Pathway(SpherePath);
         }
         if (Input.GetKeyDown("tab"))
         {
+            // Shows The Debug Map To The Player
             constructor.showDebug =! constructor.showDebug;
         }
     }
 
     private GameObject CreatePlayer()
     {
+        // Create The Player
         Vector3 playerStartPosition = new Vector3(constructor.hallWidth, 1, constructor.hallWidth);
         player = Instantiate(playerPrefab, playerStartPosition, Quaternion.identity);
         player.tag = "Generated";
@@ -64,6 +72,7 @@ public class GameController : MonoBehaviour
 
     private GameObject CreateMonster()
     {
+        // Create The Monster
         Vector3 monsterPosition = new Vector3(constructor.goalCol * constructor.hallWidth, 0f, constructor.goalRow * constructor.hallWidth);
         GameObject monster = Instantiate(monsterPrefab, monsterPosition, Quaternion.identity);
         monster.tag = "Generated";
@@ -76,12 +85,14 @@ public class GameController : MonoBehaviour
 
     private void OnTreasureTrigger(GameObject trigger, GameObject other)
     {
+        // Won The Game, Stop The AI
         Debug.Log("You Won!");
         aIController.StopAI();
     }
 
     private void OnMonsterTrigger(GameObject trigger, GameObject other)
     {
+        // Lost The Game So Restart
         Debug.Log("Gotcha!");
         aIController.StopAI();
         SetUpMaze();
@@ -89,6 +100,7 @@ public class GameController : MonoBehaviour
 
     private void SetUpMaze()
     {
+        // Resets The Game
         constructor.GenerateNewMaze(rows, cols, OnTreasureTrigger);
         aIController.Graph = constructor.graph;
         aIController.Player = CreatePlayer();
